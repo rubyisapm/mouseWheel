@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css" rel="stylesheet">
+        body{
+            height:2000px;
+        }
+        #container{
+            width:100px;
+            height:100px;
+            background-color:#ccc;
+            position:fixed;
+            top:300px;
+            left:300px
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+<script type="text/javascript">
+    var addEvent = (function () {
+        if (window.addEventListener) {
+            return function (el, sType, fn, capture) {
+                el.addEventListener(sType, fn, (capture));
+            };
+        } else if (window.attachEvent) {
+            return function (el, sType, fn, capture) {
+                el.attachEvent("on" + sType, fn);
+            };
+        } else {
+            return function () {
+            };
+        }
+    })();
+    var stopEvent=function (event) {
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        } else {
+            event.cancelBubble = true;
+        }
+
+        if (event.preventDefault) {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
+    };
+    var zoomIn = function () {
+        console.log(document.documentElement.scrollTop>400 && document.documentElement.scrollTop<1000);
+        if(document.documentElement.scrollTop>400 && document.documentElement.scrollTop<1000){
+            window.scrollTo(0,0);
+        }
+        //scrollHeight
+    };
+    var zoomOut = function () {
+        console.log(document.documentElement.scrollTop);
+        if(document.documentElement.scrollTop>1000){
+            window.scrollTo(0,2000);
+        }
+    };
+    var isFirefox=function(){
+        if(window.navigator.userAgent.toLowerCase().indexOf("firefox")>-1){
+            return true;
+        }else{
+            return false;
+        }
+    };
+    var $=function(str){
+        return document.getElementById(str);
+    };
+    window.onload=function(){
+        var mousewheel = isFirefox() ? "DOMMouseScroll" : "mousewheel";
+        addEvent(window, mousewheel, function (event) {
+            var delta = 0;
+            event = window.event || event;
+            stopEvent(event);
+
+            delta = event.wheelDelta ? (event.wheelDelta / 120) : (-event.detail / 3);
+            delta > 0 ? zoomIn() : zoomOut();
+        }, false);
+
+    }
+
+
+</script>
+</body>
+</html>
