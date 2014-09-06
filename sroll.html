@@ -3,87 +3,49 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <script type="text/javascript" src="./cool.js"></script>
+    <script type="text/javascript" src="./scroll.js"></script>
     <style type="text/css" rel="stylesheet">
         body{
-            height:2000px;
+            height:5000px;
         }
-        #container{
-            width:100px;
-            height:100px;
-            background-color:#ccc;
-            position:fixed;
-            top:300px;
-            left:300px
+        body,div{
+            padding:0;
+            margin:0
+        }
+        .ppt{
+            width:80%;
+            height:700px;
+            padding:20px 0;
+            margin:20px auto;
+            border:5px solid #DBFFD0;
+        }
+        #ppt1{
+            background-color:#FFD0D0
+        }
+        #ppt2{
+            background-color:#DBFFD0
+        }
+        #ppt3{
+            background-color:#F9D0FF
+        }
+        #ppt4{
+            background-color:#FF9F69
+        }
+        #ppt5{
+            background-color:#B0FCFF
+        }
+        #ppt6{
+            background-color:#FFB0F2
         }
     </style>
 </head>
 <body>
-    <div id="container"></div>
-<script type="text/javascript">
-    var addEvent = (function () {
-        if (window.addEventListener) {
-            return function (el, sType, fn, capture) {
-                el.addEventListener(sType, fn, (capture));
-            };
-        } else if (window.attachEvent) {
-            return function (el, sType, fn, capture) {
-                el.attachEvent("on" + sType, fn);
-            };
-        } else {
-            return function () {
-            };
-        }
-    })();
-    var stopEvent=function (event) {
-        if (event.stopPropagation) {
-            event.stopPropagation();
-        } else {
-            event.cancelBubble = true;
-        }
-
-        if (event.preventDefault) {
-            event.preventDefault();
-        } else {
-            event.returnValue = false;
-        }
-    };
-    var zoomIn = function () {
-        console.log(document.documentElement.scrollTop>400 && document.documentElement.scrollTop<1000);
-        if(document.documentElement.scrollTop>400 && document.documentElement.scrollTop<1000){
-            window.scrollTo(0,0);
-        }
-        //scrollHeight
-    };
-    var zoomOut = function () {
-        console.log(document.documentElement.scrollTop);
-        if(document.documentElement.scrollTop>1000){
-            window.scrollTo(0,2000);
-        }
-    };
-    var isFirefox=function(){
-        if(window.navigator.userAgent.toLowerCase().indexOf("firefox")>-1){
-            return true;
-        }else{
-            return false;
-        }
-    };
-    var $=function(str){
-        return document.getElementById(str);
-    };
-    window.onload=function(){
-        var mousewheel = isFirefox() ? "DOMMouseScroll" : "mousewheel";
-        addEvent(window, mousewheel, function (event) {
-            var delta = 0;
-            event = window.event || event;
-            stopEvent(event);
-
-            delta = event.wheelDelta ? (event.wheelDelta / 120) : (-event.detail / 3);
-            delta > 0 ? zoomIn() : zoomOut();
-        }, false);
-
-    }
-
-
-</script>
+    <div id="ppt1" class="ppt"></div>
+    <div id="ppt2" class="ppt"></div>
+    <div id="ppt3" class="ppt"></div>
+    <div id="ppt4" class="ppt"></div>
+    <div id="ppt5" class="ppt"></div>
+    <div id="ppt6" class="ppt"></div>
 </body>
 </html>
