@@ -9,9 +9,10 @@ window.onload = function () {
     var pageUp = function () {
         var top = $(window).scrollTop();
         /*find the next ppt and position to it.*/
-        for(var i=6;i>=1;i--){
-            if(top-$("#ppt"+i).offsetTop()>0){
-                $(window).animate({style:"scrollTop",arm:$("#ppt"+i).offsetTop()},true,300);
+        var ppts=$(".ppt").nodeList;
+        for(var i=ppts.length-1;i>=0;i--){
+            if(top-ppts[i].offsetTop()>0){
+                $(window).animate({style:"scrollTop",arm:ppts[i].offsetTop()},true,300);
                 break;
             }
         }
@@ -19,9 +20,11 @@ window.onload = function () {
     var pageDown = function () {
         var top = $(window).scrollTop();
         /*find the next ppt and position to it.*/
-        for(var i=1;i<=6;i++){
-            if($("#ppt"+i).offsetTop()-top>0){
-                $(window).animate({style:"scrollTop",arm:$("#ppt"+i).offsetTop()},true,300);
+        var ppts=$(".ppt").nodeList;
+
+        for(var i=0;i<ppts.length;i++){
+            if(ppts[i].offsetTop()-top>0){
+                $(window).animate({style:"scrollTop",arm:ppts[i].offsetTop()},true,300);
                 break;
             }
         }
