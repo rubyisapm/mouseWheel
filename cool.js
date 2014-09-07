@@ -2,7 +2,6 @@
  * Created by ruby on 2014/9/6.
  */
 (function(window){
-    window.animated=false;
     var $=function(selector){
         return new $.prototype.init(selector);
     };
@@ -29,7 +28,20 @@
         if(userAgent.indexOf("chrome")>-1){
             return "chrome";
         }
-    }
+    };
+    $.stopEvent = function (event) {
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        } else {
+            event.cancelBubble = true;
+        }
+
+        if (event.preventDefault) {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
+    };
     $.prototype={
         constructor:$,
         init:function(selector){
@@ -81,9 +93,7 @@
                             go=0;
                     clearInterval(window.i);
                     window.i = setInterval(function(){
-
                         begin+=time/100;
-
                         if(begin<=(time/2)){
                             go=(1/2)*A*Math.pow((begin/1000),2)+before;
                         }else{

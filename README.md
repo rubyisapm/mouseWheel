@@ -5,12 +5,11 @@ a demo of the event "mouseWheel"
 ##涉及知识点：
 > * 关于元素所在位置的若干属性
 > * 关于滚轮事件的兼容
-> * 一个挫得不能再挫的库，要优化（TODO）
 > * 关于IE下滚轮连续滚动时产生的页面抖动
 
 question & solution:
 
-关于IE下滚轮连续滚动时产生的页面抖动：
+##关于IE下滚轮连续滚动时产生的页面抖动：
 这是由于连续发出的pagedown和pageup请求所致，虽然在这两者调用的animate中清除了interval，
 而由于是将i作为animate的局部变量，而这样的形式：
 clearInterval(i);
@@ -21,7 +20,6 @@ var i=setInterval(function(){  },100);
 
 测试：在不进行animate判断时，一次鼠标滚动足以生成700次执行
 在进行animate判断后，一次鼠标滚动只会生成100次执行，而这才是正确的执行次数。
-
 为什么会有700次执行，而实际上，在animate判断前，在clearInterval以后如果打印出"animate",那么同样也会有6、7次输出。
 因为每次按笔者每次正常的轮滚滑行，会触发七次mousewheel事件。而这7次毫无疑问跳过clearInter直接被传递到setInterval.
 所以我们看到了一次正常滚轮产生700次请求的问题。
@@ -38,4 +36,12 @@ var i=setInterval(function(){  },100);
 去掉第一个interval的：
 <img src="./imgs/3.png"/>
 
-PS：今天先这样...后续优化...
+最后，只是将Interval改成这样:
+clearInterval(window.i);
+window.i=setInterval(function(){   },100);
+就好了。
+
+##用JS获取dom位置:
+<img src="./imgs/DOM.gif"/>
+
+
