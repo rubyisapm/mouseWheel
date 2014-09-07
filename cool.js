@@ -2,6 +2,7 @@
  * Created by ruby on 2014/9/6.
  */
 (function(window){
+
     var $=function(selector){
         return new $.prototype.init(selector);
     };
@@ -73,7 +74,6 @@
                 style:
                 arm:
             }*/
-            var i;
             if(slowFastSlow){
                 var ele=this;
                 var style=trend.style;
@@ -84,7 +84,8 @@
                             begin= 0,
                             go=0;
                     clearInterval(i);
-                    i = setInterval(function(){
+                    animated=true;
+                    var i = setInterval(function(){
                         begin+=time/100;
 
                         if(begin<=(time/2)){
@@ -96,11 +97,13 @@
                                 if(begin>=time){
                                     go=total+before;
                                     clearInterval(i);
+                                    animated=false;
                                 }
                             }
                         }
                         ele[style].call(ele,go);
                     },time/100);
+
                 }
 
             }

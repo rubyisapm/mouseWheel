@@ -5,6 +5,7 @@
 
 
 window.onload = function () {
+    window.animated=false;
     var stopEvent = function (event) {
         if (event.stopPropagation) {
             event.stopPropagation();
@@ -19,30 +20,33 @@ window.onload = function () {
         }
     };
     var pageUp = function () {
-        var top = $(window).scrollTop();
-        /*find the next ppt and position to it.*/
-        for(var i=6;i>=1;i--){
-            if(top-$("#ppt"+i).offsetTop()>0){
-                //$(window).scrollTop($("#ppt"+i).offsetTop());
-                $(window).animate({style:"scrollTop",arm:$("#ppt"+i).offsetTop()},true,300);
-                break;
+        if(!animated){
+            console.log("pageUp");
+            var top = $(window).scrollTop();
+            /*find the next ppt and position to it.*/
+            for(var i=6;i>=1;i--){
+                if(top-$("#ppt"+i).offsetTop()>0){
+                    $(window).animate({style:"scrollTop",arm:$("#ppt"+i).offsetTop()},true,300);
+                    break;
+                }
             }
         }
 
+
     };
     var pageDown = function () {
-        var top = $(window).scrollTop();
-        /*find the next ppt and position to it.*/
-        for(var i=1;i<=6;i++){
-            if($("#ppt"+i).offsetTop()-top>0){
-                //$(window).scrollTop($("#ppt"+i).offsetTop());
-                console.log("this is a line");
-                console.log(i);
-                console.log($("#ppt"+i).offsetTop());
-                $(window).animate({style:"scrollTop",arm:$("#ppt"+i).offsetTop()},true,300);
-                break;
+        if(!animated){
+            console.log("pageDown");
+            var top = $(window).scrollTop();
+            /*find the next ppt and position to it.*/
+            for(var i=1;i<=6;i++){
+                if($("#ppt"+i).offsetTop()-top>0){
+                    $(window).animate({style:"scrollTop",arm:$("#ppt"+i).offsetTop()},true,300);
+                    break;
+                }
             }
         }
+
     };
     var mousewheel = $.browser().indexOf("firefox")>-1 ? "DOMMouseScroll" : "mousewheel";
     $(document).bind(mousewheel,function (event) {
@@ -51,9 +55,7 @@ window.onload = function () {
         event = window.event || event;
         stopEvent(event);
         delta = event.wheelDelta ? (event.wheelDelta) : (-event.detail);
-
         delta > 0 ? pageUp() : pageDown();
-
     }, false);
 
 
