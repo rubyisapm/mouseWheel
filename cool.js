@@ -79,10 +79,8 @@
                             A=4*total/Math.pow(time/1000,2),
                             begin= 0,
                             go=0;
-                    clearInterval(i);
-                    //console.log("animate");
-                    animated=true;
-                    var i = setInterval(function(){
+                    clearInterval(window.i);
+                    window.i = setInterval(function(){
 
                         begin+=time/100;
 
@@ -94,12 +92,10 @@
                             }else{
                                 if(begin>=time){
                                     go=total+before;
-                                    clearInterval(i);
-                                    animated=false;
+                                    clearInterval(window.i);
                                 }
                             }
                         }
-                        //console.log(go);
                         ele[style].call(ele,go);
                     },time/100);
 

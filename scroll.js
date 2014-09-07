@@ -19,33 +19,24 @@ window.onload = function () {
         }
     };
     var pageUp = function () {
-        if(!animated){
-
-            var top = $(window).scrollTop();
-            /*find the next ppt and position to it.*/
-            for(var i=6;i>=1;i--){
-                if(top-$("#ppt"+i).offsetTop()>0){
-                    $(window).animate({style:"scrollTop",arm:$("#ppt"+i).offsetTop()},true,300);
-                    break;
-                }
+        var top = $(window).scrollTop();
+        /*find the next ppt and position to it.*/
+        for(var i=6;i>=1;i--){
+            if(top-$("#ppt"+i).offsetTop()>0){
+                $(window).animate({style:"scrollTop",arm:$("#ppt"+i).offsetTop()},true,300);
+                break;
             }
         }
-
-
     };
     var pageDown = function () {
-        if(!animated){
-
-            var top = $(window).scrollTop();
-            /*find the next ppt and position to it.*/
-            for(var i=1;i<=6;i++){
-                if($("#ppt"+i).offsetTop()-top>0){
-                    $(window).animate({style:"scrollTop",arm:$("#ppt"+i).offsetTop()},true,300);
-                    break;
-                }
+        var top = $(window).scrollTop();
+        /*find the next ppt and position to it.*/
+        for(var i=1;i<=6;i++){
+            if($("#ppt"+i).offsetTop()-top>0){
+                $(window).animate({style:"scrollTop",arm:$("#ppt"+i).offsetTop()},true,300);
+                break;
             }
         }
-
     };
     var mousewheel = $.browser().indexOf("firefox")>-1 ? "DOMMouseScroll" : "mousewheel";
     $(document).bind(mousewheel,function (event) {
