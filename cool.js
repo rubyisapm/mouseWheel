@@ -2,7 +2,7 @@
  * Created by ruby on 2014/9/6.
  */
 (function(window){
-
+    window.animated=false;
     var $=function(selector){
         return new $.prototype.init(selector);
     };
@@ -70,22 +70,20 @@
             }
         },
         animate:function(trend,slowFastSlow,time){
-            /*trend:{
-                style:
-                arm:
-            }*/
             if(slowFastSlow){
                 var ele=this;
                 var style=trend.style;
                 var before=ele[style].call(this);
                 if( typeof ele[style]=="function"){
                         var total=parseFloat(trend.arm-before),
-                            A=4*total/Math.pow(time*1/1000,2),
+                            A=4*total/Math.pow(time/1000,2),
                             begin= 0,
                             go=0;
                     clearInterval(i);
+                    //console.log("animate");
                     animated=true;
                     var i = setInterval(function(){
+
                         begin+=time/100;
 
                         if(begin<=(time/2)){
@@ -101,6 +99,7 @@
                                 }
                             }
                         }
+                        //console.log(go);
                         ele[style].call(ele,go);
                     },time/100);
 
@@ -111,6 +110,7 @@
 
 
         }
+
 
 
 

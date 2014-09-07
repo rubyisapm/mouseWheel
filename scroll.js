@@ -5,7 +5,6 @@
 
 
 window.onload = function () {
-    window.animated=false;
     var stopEvent = function (event) {
         if (event.stopPropagation) {
             event.stopPropagation();
@@ -21,7 +20,7 @@ window.onload = function () {
     };
     var pageUp = function () {
         if(!animated){
-            console.log("pageUp");
+
             var top = $(window).scrollTop();
             /*find the next ppt and position to it.*/
             for(var i=6;i>=1;i--){
@@ -36,7 +35,7 @@ window.onload = function () {
     };
     var pageDown = function () {
         if(!animated){
-            console.log("pageDown");
+
             var top = $(window).scrollTop();
             /*find the next ppt and position to it.*/
             for(var i=1;i<=6;i++){
