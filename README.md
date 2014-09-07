@@ -19,7 +19,6 @@ var i=setInterval(function(){  },100);
 所以走了以下的测试流程：并做了animated判断。即将animated作为全局变量，在进行setInterval前将其值置为true。而在pageUp和pageDown中
 首先检测该值为false，才会做相应的判断并发送事件。
 
-<p style="text-decoration:middleline">
 测试：在不进行animate判断时，一次鼠标滚动足以生成700次执行
 在进行animate判断后，一次鼠标滚动只会生成100次执行，而这才是正确的执行次数。
 
@@ -38,5 +37,5 @@ var i=setInterval(function(){  },100);
 
 去掉第一个interval的：
 <img src="./imgs/3.png"/>
-</p>
+
 PS：今天先这样...后续优化...
