@@ -141,8 +141,33 @@
                 }
 
             }
+        },
+        css:function(stylename,property){
+            var ele=this.dom;
+            if(arguments.length==1){
+                if(window.getComputedStyle){
+                    return ele.ownerDocument.defaultView.getComputedStyle(ele,null)[stylename];
+                }else{
+                    return ele.currentStyle["position"];
+                }
+            }
+            if(property){
+                ele.style[stylename]=property;
+            }
 
-
+        },
+        html:function(str){
+            if(str){
+                this.dom.innerHTML=str;
+            }else{
+                return this.dom.innerHTML;
+            }
+        },
+        show:function(){
+            this.css("display","block");
+        },
+        hide:function(){
+            this.css("display","none");
         }
 
 
